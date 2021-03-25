@@ -1,65 +1,158 @@
-#include<iostream>
-#include<vector>
-#include<random>
-#include<algorithm>
-#include<stdexcept>
+#include <iostream>
 
-typedef int itemType;
+#include<stdio.h>
+
+#include<stdlib.h>
+
 using namespace std;
 
-void Print_Vec(const vector<int>& vec) {
-    for (const int& it : vec) {
-        cout << it << " ";
-    }
-    cout << "\n";
+
+
+#define MAX 1500
+
+typedef int itemType;
+
+int data_swap = 0;
+
+int comparision = 0;
+
+
+
+void insertion(itemType a[], int N) // 삽입 정렬
+
+{
+
+	int i, j;
+
+	itemType v;
+
+	for (i = 2; i <= N; i++) {
+
+		comparision++; // 비교연산 카운터 증가
+
+		v = a[i]; //현재 삽입될 숫자를 v변수로 복사
+
+		j = i;
+
+		while (a[j - 1] > v) { // 이전배열의 값이 키 값보다 크면
+
+			data_swap++; // 자료이동 카운터 증가
+
+			a[j] = a[j - 1]; // 데이터 이동
+
+			j--; // j 감소
+
+		}
+
+		a[j] = v;
+
+	}
+
+};
+
+
+
+void result() // 결과 출력 함수
+
+{
+
+	cout << "\n비교연산 회수는 " << comparision << "번 수행 되었습니다.\n";
+
+	cout << "자료이동 회수는 " << data_swap << "번 수행 되었습니다.\n\n";
+
+
+
+	comparision = 0; // 비교연산 카운터 변수 초기화
+
+	data_swap = 0; // 자료이동 카운터 변수 초기화
+
 }
 
-void sameDelete(vector<int>& vec) {
-    sort(vec.begin(), vec.end());
-    vec.erase(unique(vec.begin(), vec.end()), vec.end());
+void main()
+
+{
+
+	// 삽입,쉘 정렬에 사용되는 배열
+
+	itemType a[MAX + 1];
+
+	a[0] = -1; // 첫번째 배열에 더미값 초기화
+
+
+
+	int j = 1; // Worst Case 배열을 위한 변수
+
+
+
+
+
+	printf("\nInserttion Sort : %d개의 양의정수 Case 비교\n\n", MAX);
+
+
+
+
+
+	//////////////// Best Case array & Result //////////////////
+
+	for (int i = 1; i <= MAX; i++) a[i] = i;
+
+	printf("--------------------------------------------------");
+
+	insertion(a, MAX);
+
+	cout << "\n--- Best Case ---";
+
+	result();
+
+	////////////////////////////////////////////////////////////
+
+
+
+
+
+	//////////////// Worst Case array & Result /////////////////
+
+	for (int i = MAX; i >= 1; i--) {
+
+		a[j] = i;
+
+		j++;
+
+	}
+
+	printf("--------------------------------------------------");
+
+	insertion(a, MAX);
+
+	cout << "\n--- Worst Case ---";
+
+	result();
+
+	////////////////////////////////////////////////////////////
+
+
+
+
+
+	//////////////// Random Case array & Result ////////////////
+
+	for (int i = 1; i <= MAX; i++)a[i] = rand() % MAX + 1;
+
+	printf("--------------------------------------------------");
+
+	insertion(a, MAX);
+
+	cout << "\n--- Random Case ---";
+
+	result();
+
+	////////////////////////////////////////////////////////////
+
+
+
+	printf("--------------------------------------------------\n\n");
+
 }
-int main() {
-    int a, b, r;
-    int v1_size, v2_size;
-    vector<int> v1, v2;
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<int> dis(1, 100);
 
-    cout << "";
-    cin >> a >> b;
 
-    for (int i = 0; i < a; i++) {
-        r = dis(gen);
-        v1.push_back(r);
-    }
-    cout << "집합 A - ";
-    sameDelete(v1);
-    Print_Vec(v1);
 
-    for (int i = 0; i < b; i++) {
-        r = dis(gen);
-        v2.push_back(r);
-    }
-    cout << "\n" << "집합 B - ";
-    sameDelete(v2);
-    Print_Vec(v2);
-
-    cout << "\n" << "교집합 - ";
-    vector<int> v3;
-    for (int i = 0; i < v1.size(); i++) {
-        for (int j = 0; j < v2.size(); j++) {
-            if (v1.at(i) == v2.at(j)) {
-                v3.push_back(v1.at(i));
-            }
-        }
-    }
-    sort(v3.begin(), v3.end());
-    Print_Vec(v3);
-
-    cout << "\n" << "합집합 - ";
-    vector<int> v4(v1.size() + v2.size());
-    auto iter = set_union(v1.begin(), v1.end(), v2.begin(), v2.end(), v4.begin());
-    v4.erase(iter, v4.end());
-    Print_Vec(v4);
-}
