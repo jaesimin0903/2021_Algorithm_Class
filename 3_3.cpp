@@ -5,30 +5,7 @@
 using namespace std;
 int data_Swap = 0;
 int compare = 0;
-/*
-int Bubble(int sorted, vector<int> &a, int n)
-{
-    int temp;
-    if (*(a - 1) > *a) {
-        temp = *(a - 1);
-        *(a - 1) = *a;
-        *a = temp;
-        sorted = false;
-    }
-    return sorted;
-}
 
-void bubbleSort(vector<int> &a, int n)
-{
-    int i, Sorted;
-    Sorted = false;
-    while (!Sorted) {
-        Sorted = true;
-        for (i = 1; i < n; i++)
-            Sorted = Bubble(Sorted, a[i], n);
-    }
-}
-*/
 void bubble_sort(vector<int> &list, int n) {
     int i, j, temp;
 

@@ -76,15 +76,15 @@ void bubble_sort(vector<int>& list, int n) {
             // j번째와 j+1번째의 요소가 크기 순이 아니면 교환
             if (list[j] > list[j + 1]) {
                 data_Swap++;
-                temp = list[j];
+                temp = list[j+1];
                 swap_Sum += temp;
-                //cout << temp<<" ";
+           
                 list[j] = list[j + 1];
-                // cout << list[j + 1]<< " ";
-                swap_Sum += list[j + 1];
-                list[j + 1] = temp;
+              
+                swap_Sum += list[j ];
+                list[j] = temp;
                 swap_Sum += temp;
-                //cout << temp<< " " << swap_Sum<<endl;
+            
             }
         }
 

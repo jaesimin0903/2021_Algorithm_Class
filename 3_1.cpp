@@ -5,21 +5,7 @@
 using namespace std;
 int data_Swap = 0;
 int compare = 0;
-void insertionSort(std::vector<int>& vec)
-{
-    for (auto it = vec.begin(); it != vec.end(); it++)
-    {
-        // Searching the upper bound, i.e., first 
-        // element greater than *it from beginning
-        auto const insertion_point =
-            std::upper_bound(vec.begin(), it, *it);
 
-        // Shifting the unsorted part
-        std::rotate(insertion_point, it, it + 1);
-        data_Swap++;
-    }
-
-}
 void insertion(vector<int>& a, int n)
 {
     int i, j, v;
@@ -52,6 +38,7 @@ int main()
     std::vector<int> arr, arr1;
     arr.resize(N, 0);
     arr1.resize(N, 0);
+    //硅凯 A 积己
     for (int i = 0; i < N; i++) {
         arr.push_back(j);
         j--;
@@ -68,6 +55,7 @@ int main()
     d1 = data_Swap;
     data_Swap = 0;
     compare = 0;
+    //硅凯 B 积己
     srand((unsigned)time(NULL));
     for (int i = 0; i < N; i++) {
         int a = 1 + rand() % 100000;
