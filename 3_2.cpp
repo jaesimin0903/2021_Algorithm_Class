@@ -6,7 +6,7 @@ using namespace std;
 int data_Swap = 0;
 int compare = 0;
 
-void shellsort(vector<int>&a, int N) // 쉘 정렬
+void shellsort(vector<int>& a, int N) // 쉘 정렬
 
 {
 
@@ -86,32 +86,37 @@ int main()
     d1 = data_Swap;
     data_Swap = 0;
     compare = 0;
-    srand((unsigned)time(NULL));
-    for (int i = 0; i < N; i++) {
-        int a = 1 + rand() % 100000;
-        arr1.push_back(a);
-    }
-    unique(arr1.begin(), arr1.end());
-    arr1.erase(unique(arr1.begin(), arr1.end()), arr1.end());
-    while (arr1.size() < N)
-    {
-        for (int i = arr1.size(); i < N; i++) {
-            int j = arr1.size();
-            int a = 1 + rand() % 100000;
-            arr1.push_back(a);
-            unique(arr1.begin(), arr1.end());
-            arr1.erase(unique(arr1.begin(), arr1.end()), arr1.end());
-        }
-    }
 
-    shellsort(arr1, N);
-    unique(arr1.begin(), arr1.end());
-    arr1.erase(arr1.begin() + N, arr1.end());
+    // B 벡터 생성 //
+
+
+    vector<int> v1;
+    v1.resize(0, 1);
+    int r1, r2, test = 0;
+    for (int i = 1; i <= N; i++) {
+        v1.push_back(i);
+
+    }
+    srand(unsigned(time(NULL)));
+    for (int i = 0; i < N; i++) {
+
+        r1 = 1 + rand() % v1.size() - 1;
+        r2 = 1 + rand() % v1.size() - 1;
+        swap(v1.at(r1), v1.at(r2));
+
+    }
+    for (int i = 0; i < 20;i++) {
+        cout << v1[i] << " ";
+    }
+    // B 벡터 생성 // 
+    cout << endl;
+    shellsort(v1, N - 1);
+
     c2 = compare;
     d2 = data_Swap;
     cout << "SortedData_B: ";
-    for (int i = 1; i <= 20; i++) {
-        cout << arr1[i] << " ";
+    for (int i = 0; i < 20; i++) {
+        cout << v1[i] << " ";
     }
     cout << endl;
     print('A', c1, d1);

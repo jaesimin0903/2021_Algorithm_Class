@@ -13,11 +13,15 @@ void insertion(vector<int>& a, int n)
     for (i = 2; i <= n; i++)
     {
         compare++;
+
         v = a[i]; j = i;
-        while (a[j - 1] > v) { data_Swap++; a[j] = a[j - 1]; j--; }
+        while (a[j - 1] > v) { //cout << "here" << endl;
+            data_Swap++; a[j] = a[j - 1]; j--;
+        }
         a[j] = v;
 
     }
+
 
 }
 
@@ -50,37 +54,42 @@ int main()
     for (int i = 1; i <= 20; i++) {
         cout << arr[i] << " ";
     }
-    cout << endl;
+
     c1 = compare;
     d1 = data_Swap;
     data_Swap = 0;
     compare = 0;
-    //硅凯 B 积己
-    srand((unsigned)time(NULL));
+    // B 氦磐 积己 //
+
+
+    vector<int> v1;
+
+    int r1, r2, test = 0;
+    for (int i = 1; i <= N; i++) {
+        v1.push_back(i);
+
+    }
+
+    srand(unsigned(time(NULL)));
     for (int i = 0; i < N; i++) {
-        int a = 1 + rand() % 100000;
-        arr1.push_back(a);
+
+        r1 = 1 + rand() % v1.size() - 1;
+        r2 = 1 + rand() % v1.size() - 1;
+        swap(v1.at(r1), v1.at(r2));
+
     }
-    unique(arr1.begin(), arr1.end());
-    arr1.erase(unique(arr1.begin(), arr1.end()), arr1.end());
-    while (arr1.size() < N)
-    {
-        for (int i = arr1.size(); i < N; i++) {
-            int j = arr1.size();
-            int a = 1 + rand() % 100000;
-            arr1.push_back(a);
-            unique(arr1.begin(), arr1.end());
-            arr1.erase(unique(arr1.begin(), arr1.end()), arr1.end());
-        }
-    }
-    insertion(arr1, N);
-    unique(arr1.begin(), arr1.end());
-    arr1.erase(arr1.begin() + N, arr1.end());
+    cout << endl;
+    // B 氦磐 积己 /
+
+
+    v1.insert(v1.begin(), -1);
+    insertion(v1, N);
+
     c2 = compare;
     d2 = data_Swap;
     cout << "SortedData_B: ";
     for (int i = 1; i <= 20; i++) {
-        cout << arr1[i] << " ";
+        cout << v1[i] << " ";
     }
     cout << endl;
     print('A', c1, d1);
