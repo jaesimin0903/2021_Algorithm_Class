@@ -13,8 +13,9 @@ void insertion(vector<int>& a, int n)
     for (i = 2; i <= n; i++)
     {
         compare++;
-        v = a[i]; j = i;
-        while (a[j - 1] > v) { data_Swap++; a[j] = a[j - 1]; swap_Sum += a[j]; swap_Sum += a[j - 1]; j--; }
+        v = a[i]; swap_Sum += v; j = i;
+        while (a[j - 1] > v) { data_Swap++; a[j] = a[j - 1]; swap_Sum += a[j - 1];  j--; }
+        swap_Sum += v;
         a[j] = v;
 
     }
@@ -44,14 +45,14 @@ void shellsort(vector<int>& a, int N) // 쉘 정렬
             compare++; // 비교연산 카운터 증가
 
             v = a[i]; j = i;
-
+            swap_Sum += v;
             while (a[j - h] > v) {
 
                 data_Swap++; // 자료이동 카운터 증가
-                swap_Sum += a[j];
+                //swap_Sum += a[j];
 
                 a[j] = a[j - h];
-                swap_Sum += a[j - 1];
+                swap_Sum += a[j - h];
                 j -= h;
 
                 if (j <= h - 1)break;
@@ -59,7 +60,7 @@ void shellsort(vector<int>& a, int N) // 쉘 정렬
             }
 
             a[j] = v;
-
+            swap_Sum += v;
         }
 
     } while (h > 1);
@@ -76,15 +77,16 @@ void bubble_sort(vector<int>& list, int n) {
             // j번째와 j+1번째의 요소가 크기 순이 아니면 교환
             if (list[j] > list[j + 1]) {
                 data_Swap++;
-                temp = list[j+1];
-                swap_Sum += temp;
-           
+                swap_Sum += list[j + 1];
+                temp = list[j + 1];
+
+                swap_Sum += list[j];
                 list[j] = list[j + 1];
-              
-                swap_Sum += list[j ];
+
+                swap_Sum += list[j];
                 list[j] = temp;
-                swap_Sum += temp;
-            
+                swap_Sum += list[j];
+
             }
         }
 

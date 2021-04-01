@@ -29,19 +29,21 @@ void shellsort(vector<int>& a, int N) // 쉘 정렬
             compare++; // 비교연산 카운터 증가
 
             v = a[i]; j = i;
-
+            data_Swap++;
             while (a[j - h] > v) {
-
+                compare++;
                 data_Swap++; // 자료이동 카운터 증가
 
                 a[j] = a[j - h];
 
                 j -= h;
 
-                if (j <= h - 1)break;
+                if (j <= h - 1) {
+                    break;
+                }
 
             }
-
+            data_Swap++;
             a[j] = v;
 
         }
@@ -105,11 +107,9 @@ int main()
         swap(v1.at(r1), v1.at(r2));
 
     }
-    for (int i = 0; i < 20;i++) {
-        cout << v1[i] << " ";
-    }
+
     // B 벡터 생성 // 
-    cout << endl;
+
     shellsort(v1, N - 1);
 
     c2 = compare;

@@ -11,13 +11,14 @@ void bubble_sort(vector<int>& list, int n) {
 
     for (i = n - 1; i > 0; i--) {
         // 0 ~ (i-1)까지 반복
-        compare++;
-        for (j = 0; j < i; j++) {
 
+        for (j = 0; j < i; j++) {
+            compare++;
             // j번째와 j+1번째의 요소가 크기 순이 아니면 교환
             if (list[j] > list[j + 1]) {
                 data_Swap++;
                 temp = list[j];
+                data_Swap++;
                 list[j] = list[j + 1];
                 list[j + 1] = temp;
             }

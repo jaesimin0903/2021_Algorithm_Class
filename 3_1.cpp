@@ -12,12 +12,14 @@ void insertion(vector<int>& a, int n)
 
     for (i = 2; i <= n; i++)
     {
-        compare++;
+
 
         v = a[i]; j = i;
         while (a[j - 1] > v) { //cout << "here" << endl;
+            compare++;
             data_Swap++; a[j] = a[j - 1]; j--;
         }
+        data_Swap++;
         a[j] = v;
 
     }
