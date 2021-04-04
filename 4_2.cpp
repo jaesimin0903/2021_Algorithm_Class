@@ -20,79 +20,21 @@ itemType b[100000];
 
 inline void swap(itemType a[], int i, int j) {
     itemType t = a[i]; a[i] = a[j]; a[j] = t;
-    data_Swap++;
+    data_Swap++; data_Swap++;
 };
-
-
-
-void makeHeap(itemType a[], int Root, int LastNode)
-
-{
-    int Parent, LeftSon, RightSon, Son, RootValue;
-    Parent = Root;
-    RootValue = a[Root];
-    LeftSon = 2 * Parent + 1;
-    RightSon = LeftSon + 1;
-    while (LeftSon <= LastNode) {
-        if (RightSon <= LastNode && a[LeftSon] < a[RightSon])
-        {
-            Son = RightSon; compare++;
-        }
-        else { Son = LeftSon; compare++; }
-        if (RootValue < a[Son]) {
-            compare++;
-            a[Parent] = a[Son];
-            Parent = Son;
-            LeftSon = Parent * 2 + 1;
-            RightSon = LeftSon + 1;
-        }
-        else break;
-    }
-    a[Parent] = RootValue;
-}
-
-void heapsort(itemType a[], int N)
-
-{
-
-
-
-    int i;
-
-    for (i = N / 2; i >= 1; i--)
-
-        makeHeap(a, i - 1, N - 1);
-
-    for (i = N - 1; i >= 1; i--)
-
-    {
-
-        swap(a, 0, i);
-
-        makeHeap(a, 0, i - 1);
-
-    }
-
-}
-
-
 
 void merge(int a[], int low, int mid, int high)
 
 {
 
-
-
     int i, leftptr, rightptr, bufptr;
 
     leftptr = low; rightptr = mid + 1; bufptr = low;
 
-
-
     // 합병이 진행되고 있는 두 부분배열 모두에 아직 키가 남아있을 때 이들을 합병
 
-    while (leftptr <= mid && rightptr <= high)
-
+    while (leftptr <= mid && rightptr <= high) {
+        //compare++;
         if (a[leftptr] < a[rightptr])
 
         {
@@ -101,36 +43,37 @@ void merge(int a[], int low, int mid, int high)
 
         else { b[bufptr++] = a[rightptr++]; data_Swap++; }
 
-
+    }
 
     // 두 부분배열 중 한 개의 배열에만 키가 남았을 때 이 키들을 배열 b의
 
     // 합병된 원소들 뒤에 그대로 복사
 
-    if (leftptr > mid)
+    if (leftptr > mid) {
 
         for (i = rightptr; i <= high; i++)
 
         {
             b[bufptr++] = a[i]; compare++;
         }
-
-    else
+    }
+    else {
 
         for (i = leftptr; i <= mid; i++)
 
         {
-            b[bufptr++] = a[i]; compare++;
+            b[bufptr++] = a[i];  compare++;
         }
-
+    }
 
 
     // 합병이 끝나면 b에 있는 정렬된 키들을 a에 옮긴다
 
     for (i = low; i <= high; i++)
-
+    {
         a[i] = b[i];
-
+        //data_Swap++;
+    }
 }
 
 
@@ -224,6 +167,10 @@ int main()
         SWAP(arr1, r1, r2);
 
     }
+    for (int i = 1; i <= 20; i++) {
+        cout << arr1[i] << " ";
+    }
+    cout << endl;
     mergesort(arr1, 0, N - 1);
     cout << "SortedData_B: ";
     for (int i = 1; i <= 20; i++) {

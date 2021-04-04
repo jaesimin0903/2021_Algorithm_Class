@@ -12,6 +12,7 @@ void SWAP(int* arr, int a, int b) {
     arr[a] = arr[b];
     arr[b] = temp;
     data_Swap++;
+    data_Swap++;
 }
 int Partition(int* arr, int len) {
     SWAP(arr, 0, rand() % len);
@@ -30,7 +31,9 @@ int Partition(int* arr, int len) {
             compare++;
         } while (high > 0 && arr[high] > temp);
 
-        if (low > high) break;
+        if (low > high) {
+            compare++; break;
+        }
         SWAP(arr, low, high);
     }
     SWAP(arr, 0, high);
@@ -43,32 +46,6 @@ void Quicksort(int* arr, int len) {
     Quicksort(arr, pivot);
     Quicksort(arr + pivot + 1, len - pivot - 1);
 }
-/*
-int Old_Partition(int* arr, int left, int right) {
-    int pivot = left;
-    while (left < right) {
-        while (arr[pivot] > arr[left] && left < right)
-            left++;
-        while (arr[pivot] <= arr[right] && left < right)
-            right--;
-        if (left < right)
-            SWAP(arr, left, right);
-    }
-    SWAP(arr, pivot, right);
-    return right;
-}
-
-void Old_Quicksort(int* arr, int left, int right) {
-    if (left < right) {
-        int pivot = Old_Partition(arr, left, right);
-        Old_Quicksort(arr, left, pivot);
-        Old_Quicksort(arr, pivot + 1, right);
-    }
-}
-*/
-
-
-
 
 void print(char A, int a, int b)
 {
