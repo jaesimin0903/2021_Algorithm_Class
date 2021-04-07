@@ -6,13 +6,20 @@ using namespace std;
 int data_Swap = 0;
 int compare = 0;
 int swap_Sum = 0;
+
+void arrSWAP(int* arr, int a, int b) {
+    int temp;
+    temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+
+}
 void SWAP(int* arr, int a, int b) {
     int temp;
     temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
-    data_Swap++;
-    data_Swap++;
+    data_Swap += 2;
 }
 int Partition(int* arr, int len) {
     SWAP(arr, 0, rand() % len);
@@ -91,7 +98,7 @@ int main()
 
         r1 = 1 + rand() % N - 1;
         r2 = 1 + rand() % N - 1;
-        SWAP(arr1, r1, r2);
+        arrSWAP(arr1, r1, r2);
 
     }
     Quicksort(arr1, N);
