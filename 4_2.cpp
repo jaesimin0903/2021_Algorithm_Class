@@ -34,14 +34,14 @@ void merge(int a[], int low, int mid, int high)
     // 합병이 진행되고 있는 두 부분배열 모두에 아직 키가 남아있을 때 이들을 합병
 
     while (leftptr <= mid && rightptr <= high) {
-        //compare++;
+        compare++;
         if (a[leftptr] < a[rightptr])
 
         {
-            b[bufptr++] = a[leftptr++]; data_Swap++;
+            b[bufptr++] = a[leftptr++]; compare++;data_Swap++;
         }
 
-        else { b[bufptr++] = a[rightptr++]; data_Swap++; }
+        else { b[bufptr++] = a[rightptr++]; compare++;data_Swap++; }
 
     }
 
@@ -54,7 +54,7 @@ void merge(int a[], int low, int mid, int high)
         for (i = rightptr; i <= high; i++)
 
         {
-            b[bufptr++] = a[i]; compare++;
+            b[bufptr++] = a[i]; compare++;data_Swap++;
         }
     }
     else {
@@ -62,7 +62,8 @@ void merge(int a[], int low, int mid, int high)
         for (i = leftptr; i <= mid; i++)
 
         {
-            b[bufptr++] = a[i];  compare++;
+            b[bufptr++] = a[i];  compare++;data_Swap++;
+
         }
     }
 
@@ -72,7 +73,7 @@ void merge(int a[], int low, int mid, int high)
     for (i = low; i <= high; i++)
     {
         a[i] = b[i];
-        //data_Swap++;
+        data_Swap++;
     }
 }
 

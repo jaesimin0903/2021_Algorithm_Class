@@ -21,7 +21,7 @@ inline void swap(itemType a[], int i, int j) {
 void CountSort(itemType a[], itemType b[], itemType N[], int n, int k) {
     int i, j;
     for (i = 1; i <= k; i++) N[i] = 0; // 배열 초기화
-    for (i = 1; i <= n; i++) N[a[i]] = N[a[i]] + 1;
+    for (i = 1; i <= n; i++) N[a[i]] = N[a[i]] + 1; data_Swap++;
     for (i = 2; i <= k; i++) N[i] = N[i] + N[i - 1];
     for (j = n; j >= 1; j--) {
         b[N[a[j]]] = a[j];

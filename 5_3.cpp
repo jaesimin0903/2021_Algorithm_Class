@@ -49,7 +49,7 @@ void radixSort(itemType* a, int n) {
 
         for (j = 0; j < 10; j++) {
             if (TABLE[j] != z) {
-                x = TABLE[j];
+                x = TABLE[j]; 
                 while (x != z) {
                     a[cnt++] = x->value; data_Swap++;
                     temp = x; // 메모리에서 노드를 삭제하기 위해 임시 저장
@@ -79,9 +79,6 @@ int main()
     int* arr = new int[N];
     int* arr1 = new int[N];
     int* arr2 = new int[N];
-    int* rarr = new int[N];
-    int* rarr1 = new int[N];
-    int* rarr2 = new int[N];
     int* count = new int[30000];
     int j = 0;
     j = N;
@@ -139,7 +136,5 @@ int main()
     print('A', c1, d1);
     print('B', c2, d2);
     print('C', c3, d3);
-
-    cout << endl;
     delete arr, arr1, arr2;
 }

@@ -7,6 +7,7 @@ int data_Swap = 0;
 int compare = 0;
 int swap_Sum = 0;
 
+typedef int itemType;
 void arrSWAP(int* arr, int a, int b) {
     int temp;
     temp = arr[a];
@@ -19,7 +20,8 @@ void SWAP(int* arr, int a, int b) {
     temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
-    data_Swap += 2;
+    data_Swap++;
+    data_Swap++;
 }
 int Partition(int* arr, int len) {
     SWAP(arr, 0, rand() % len);
@@ -27,15 +29,16 @@ int Partition(int* arr, int len) {
 
     int low = 0;
     int high = len;
-
+    compare++;
     while (1) {
+        compare++;
         do {
             low++;
-            compare++;
+            compare += 2;
         } while (low < len && arr[low] < temp);
         do {
             high--;
-            compare++;
+            compare += 2;
         } while (high > 0 && arr[high] > temp);
 
         if (low > high) {
@@ -46,12 +49,43 @@ int Partition(int* arr, int len) {
     SWAP(arr, 0, high);
     return high;
 }
+
+
 void Quicksort(int* arr, int len) {
-    if (len <= 1) return;
+    if (len <= 1) {
+        compare++;
+        return;
+
+    }
 
     int pivot = Partition(arr, len);
     Quicksort(arr, pivot);
     Quicksort(arr + pivot + 1, len - pivot - 1);
+}
+
+int partition(itemType a[], int l, int r) {
+    int i, j; itemType v;
+    if (r > l) {
+        data_Swap++;
+        v = a[l]; i = l; j = r + 1;
+        while (1) {
+            while (a[++i] < v)compare++;
+            while (a[--j] > v)compare++;
+            if (i >= j) break;
+            SWAP(a, i, j);
+        }
+        SWAP(a, j, l);
+    }
+    return j;
+}
+
+void quicksort(itemType a[], int l, int r) {
+    int  j;
+    if (r > l) {
+        j = partition(a, l, r);
+        quicksort(a, l, j - 1);
+        quicksort(a, j + 1, r);
+    }
 }
 
 void print(char A, int a, int b)
@@ -66,8 +100,8 @@ int main()
     cout << "N - ";
     cin >> N;
     int c1, c2, d1, d2;
-    int* arr = new int[N];
-    int* arr1 = new int[N];
+    int* arr = new int[N + 2];
+    int* arr1 = new int[N + 1];
     int j = 0;
     j = N;
     for (int i = 0; i < N; i++) {
@@ -75,9 +109,9 @@ int main()
         j--;
     }
 
-    Quicksort(arr, N);
+    quicksort(arr, 0, N);
     cout << "SortedData_A: ";
-    for (int i = 0; i < 20; i++) {
+    for (int i = 1; i <= 20; i++) {
         cout << arr[i] << " ";
     }
 
@@ -101,7 +135,7 @@ int main()
         arrSWAP(arr1, r1, r2);
 
     }
-    Quicksort(arr1, N);
+    quicksort(arr1, 0, N);
     cout << "SortedData_B: ";
     for (int i = 1; i <= 20; i++) {
         cout << arr1[i] << " ";
