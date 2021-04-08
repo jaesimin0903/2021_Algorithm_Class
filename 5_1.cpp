@@ -13,7 +13,7 @@ vector <int> sorted;
 inline void swap(itemType a[], int i, int j) {
 
     itemType t = a[i]; a[i] = a[j]; a[j] = t;
-    data_Swap++;data_Swap++;
+    data_Swap++; data_Swap++;
 };
 
 
@@ -148,10 +148,12 @@ int main()
         cout << arr1[i] << " ";
     }
     c2 = compare;
-    d2 = data_Swap;;
+    d2 = data_Swap;
     cout << endl;
+    compare = 0;
+    data_Swap = 0;
     for (int i = 0; i < N; i++) {
-        r1 = 1 + rand() % N - 1;
+        r1 = 1 + rand() % N;
         arr2[i] = r1;
     }
     heapsort(arr2, N);
