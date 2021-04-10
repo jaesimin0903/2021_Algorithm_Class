@@ -150,13 +150,13 @@ int main()
         cout << arr[i] << " ";
     }
 
-    for (int i = 1; i <= N; i++) {
+    for (int i = 1;i <= N; i++) {
         arr1[i] = i;
+
     }
 
     c1 = compare;
     d1 = data_Swap;;
-    cout << endl;
 
     compare = 0;
     data_Swap = 0;
@@ -168,9 +168,7 @@ int main()
         SWAP(arr1, r1, r2);
 
     }
-    for (int i = 1; i <= 20; i++) {
-        cout << arr1[i] << " ";
-    }
+
     cout << endl;
     mergesort(arr1, 0, N - 1);
     cout << "SortedData_B: ";
