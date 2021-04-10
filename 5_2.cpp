@@ -19,28 +19,29 @@ inline void swap(itemType a[], int i, int j) {
 
 //int*a = new itemType[];  int* b = new itemType[];  int *N = new itemType[];
 void CountSort(itemType a[], itemType b[], itemType N[], int n, int k) {
-    int i, j;
-    for (i = 1; i <= k; i++) N[i] = 0; // 배열 초기화
-    for (i = 1; i <= n; i++) N[a[i]] = N[a[i]] + 1; data_Swap++;
-    for (i = 2; i <= k; i++) N[i] = N[i] + N[i - 1];
-    for (j = n; j >= 1; j--) {
-        b[N[a[j]]] = a[j];
-        N[a[j]] = N[a[j]] - 1;
+    //nt i, j;
+    for (int i = 0; i < k; i++) N[i] = 0; // 배열 초기화
+    for (int i = 0; i < n; i++) N[a[i] - 1]++;
+    for (int i = 2; i <= k; i++) N[i] = N[i] + N[i - 1];
+    for (int j = n; j >= 1; j--) {
+        b[N[a[j - 1]]] = a[j - 1];
+        N[a[j - 1]] = N[a[j - 1]] - 1;
+        data_Swap++;
     }
 }
 //int count[30000];
 void newCountSort(itemType a[], itemType count[], int n) {
-    for (int i = 0;i < 30000;i++) {
+    for (int i = 0; i < 30000; i++) {
         count[i] = 0;
     }
     for (int i = 0; i < n; i++) {
         count[a[i] - 1]++;
-        compare++;
-        data_Swap += 2;
+
+        data_Swap++;
     }
     for (int i = 0; i < 20; i++) {
         if (count[i] != 0) {
-            for (int j = 0; j < count[i];j++) {
+            for (int j = 0; j < count[i]; j++) {
                 cout << i + 1 << " ";
             }
         }
@@ -75,6 +76,7 @@ int main()
     }
     cout << "SortedData_A: ";
     newCountSort(arr, count, N);
+    //newCountSort(arr, count, N);
 
 
     for (int i = 0; i < N; i++) {
