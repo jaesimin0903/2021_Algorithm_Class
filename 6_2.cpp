@@ -18,7 +18,7 @@ using namespace std;
 
 typedef int itemType;
 
-typedef int infoType;
+typedef double infoType;
 
 
 
@@ -91,7 +91,10 @@ public:
 
 	void BSTinsert(itemType v, infoType info);
 
+	void BSTdelete(itemType v);
 	void BSTresult();
+
+
 
 };
 
@@ -153,6 +156,46 @@ void BST::BSTinsert(itemType v, infoType info) // Binary search tree 를 구현하는
 
 }
 
+void BST::BSTdelete(itemType v) {
+	struct node* x;
+	struct node* p, * t, * c;
+
+	p = head;
+	x = head->r;
+	while (x->key != v && x != z) {
+		comparision++;
+		p = x;
+		x = (v < x->key) ? x->l : x->r;
+	}
+	if (x == z) {
+		comparision++;return;
+	}
+	else {
+		comparision++;t = x;
+	}
+	if (t->r == z) {
+		comparision++;x = t->l;
+	}
+	else if (t->r->l == z) {
+		comparision++;
+		x = t->r; x->l = t->l;
+	}
+	else {
+		comparision++;
+		c = x->r; while (c->l->l != z) {
+			comparision++; c = c->l;
+		}
+		x = c->l; c->l = x->r;
+		x->l = t->l; x->r = t->r;
+	}
+	free(t);
+	if (v < p->key) {
+		comparision++;p->l = x;
+	}
+	else {
+		comparision++;p->r = x;
+	}
+}
 
 
 void result(float N) // 결과출력함수
@@ -175,8 +218,6 @@ void main()
 	cin >> N;
 	BST T1(N);
 
-
-
 	int* a = new int[N];
 	int* b = new int[N];
 
@@ -186,6 +227,8 @@ void main()
 
 	int i;
 	int r1 = 0;
+	int ran = 0;
+	int r2 = 0;
 	int j = 0;
 
 
@@ -198,14 +241,17 @@ void main()
 
 	for (int i = 0; i < N;i++) {
 		r1 = 1 + rand() % N;
-		swap(a, i, r1);
+		ran = 1 + rand() % N;
+		swap(a, ran, r1);
 	}
 
 	for (i = 0; i < N; i++) {
-
 		T1.BSTinsert(a[i], info++); // Rand() 함수를 통한 임의의 수 발생과 동시에 BSTinsert를 이용하여 Binary search tree 를 구현한다.
 	}
 
+	r2 = N - 10 + rand() & N;
+
+	T1.BSTdelete(a[r2]);
 
 
 
