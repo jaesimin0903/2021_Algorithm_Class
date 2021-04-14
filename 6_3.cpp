@@ -275,7 +275,7 @@ void main()
 	for (int i = 0; i < N;i++) {
 		r1 = 1 + rand() % N;
 		ran = 1 + rand() % N;
-		swap(a, ran, r1);
+		swap(a, i, r1);
 	}
 
 	for (i = 0; i < N; i++) {
@@ -288,8 +288,9 @@ void main()
 	/*r2 = N-10 + rand() & N;
 
 	T1.BSTdelete(a[r2]);*/
-
-
+	for (i = 0; i < N; i++) T1.BSTsearch(a[i]);
+	cout << "T1";
+	result(N);
 
 	T1.BSTInorderTraverse(&T2);
 
@@ -297,7 +298,7 @@ void main()
 
 
 
-
+	cout << "T3";
 	result(N); // 총 비교회수와, 평균 비교회수를 출력한다.
 
 
