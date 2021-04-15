@@ -542,6 +542,7 @@ void search(struct bucket* hashTable, int key, int SIZE) {
 			//std::cout << "key found key = " << node->key << " value = " << node->value;
 			break;
 		}
+		nodeCompare++;
 		node = node->next;
 	}
 	//std::cout << "\nno key found";
@@ -552,7 +553,7 @@ void display() {
 	struct Node* horse;
 	int i = 0;
 
-	for (i = 0;i < SIZE; i++) {
+	for (i = 0; i < SIZE; i++) {
 
 		horse = hashTable[i].head;
 
@@ -644,7 +645,7 @@ void main()
 
 	itemType info = 0;
 
-	for (i = 0;i < N; i++) {
+	for (i = 0; i < N; i++) {
 		a[i] = i + 1;
 	}
 	for (i = 0; i < N; i++) {
@@ -652,7 +653,7 @@ void main()
 		swap(a, i, r1);
 	}
 
-	for (i = 0;i < N;i++) {
+	for (i = 0; i < N; i++) {
 		T1.BSTinsert(a[i], info);
 		insert(hashTable, a[i], info, SIZE);
 		info++;
@@ -663,36 +664,36 @@ void main()
 	T1.BSTInorderTraverse(&T2, &T3);
 	buildResult(2, N);
 	info = 0;
-	cout << "»çÀÌÁî11Æò±Õ±¸ÃàÈ½¼ö : " << hashBuild / N << '\n';
+	cout << "»çÀÌÁî11Æò±Õ±¸ÃàÈ½¼ö : " << 0 << '\n';
 	hashBuild = 0;
-	for (i = 0;i < N;i++) {
+	for (i = 0; i < N; i++) {
 
 		insert(hashTable1, a[i], info, SIZE1);
 		info++;
 	}
 	info = 0;
-	cout << "»çÀÌÁî101Æò±Õ±¸ÃàÈ½¼ö : " << hashBuild / N << '\n';
+	cout << "»çÀÌÁî101Æò±Õ±¸ÃàÈ½¼ö : " << 0 << '\n';
 	hashBuild = 0;
-	for (i = 0;i < N;i++) {
+	for (i = 0; i < N; i++) {
 		insert(hashTable2, a[i], info, SIZE2);
 		info++;
 	}
 	info = 0;
-	cout << "»çÀÌÁî1009Æò±Õ±¸ÃàÈ½¼ö : " << hashBuild / N << '\n';
+	cout << "»çÀÌÁî1009Æò±Õ±¸ÃàÈ½¼ö : " << 0 << '\n';
 	hashBuild = 0;
 
 	cout << endl << endl;
 
 	for (int i = 0; i < N; i++) T3.RBTsearch(a[i]);
 	result(3, N);
-	for (i = 0;i < N;i++) search(hashTable, a[i], SIZE);
+	for (i = 0; i < N; i++) search(hashTable, a[i], SIZE);
 
 	cout << "»çÀÌÁî11Æò±Õºñ±³¿¬»êÈ½¼ö : " << nodeCompare / N << '\n';
 	nodeCompare = 0;
-	for (i = 0;i < N;i++) search(hashTable1, a[i], SIZE1);
+	for (i = 0; i < N; i++) search(hashTable1, a[i], SIZE1);
 	cout << "»çÀÌÁî101Æò±Õºñ±³¿¬»êÈ½¼ö : " << nodeCompare / N << '\n';
 	nodeCompare = 0;
-	for (i = 0;i < N;i++) search(hashTable2, a[i], SIZE2);
+	for (i = 0; i < N; i++) search(hashTable2, a[i], SIZE2);
 	cout << "»çÀÌÁî1009Æò±Õºñ±³¿¬»êÈ½¼ö : " << nodeCompare / N << '\n';
 	nodeCompare = 0;
 }
