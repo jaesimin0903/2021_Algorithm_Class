@@ -1,9 +1,6 @@
 #include <iostream>
-
 #include <stdlib.h>
-
 #include <time.h>
-
 #include <math.h>
 #include <vector>
 #include <algorithm>
@@ -14,32 +11,32 @@ int radCompare = 0;
 int computeRad = 0;
 // 점(point) 구조체
 
+
 struct point
 
 {
-
 	int x;
-
 	int y;
-
 	char c;
-
 	double angle;
-
 };
-
-
-
 // 선(line) 구조체
 
-struct line
-
+bool compare_pos(point p1, point p2)
 {
-
+	if (p1.y != p2.y)
+	{
+		return p1.y < p2.y;
+	}
+	else
+	{
+		return p1.x < p2.x;
+	}
+}
+struct line
+{
 	struct point p1;
-
 	struct point p2;
-
 };
 
 inline void swap(vector<point>& v, int i, int j) {
@@ -123,6 +120,11 @@ void heapsort(vector<point>& v, int N)
 
 	}
 
+	for (i = 0; i <= N;i++) {
+		if (v[i].angle == v[i + 1].angle && v[i].x > v[i + 1].x)
+			swap(v, i, i + 1);
+		else if (v[i].angle < v[i + 1].angle) break;
+	}
 }
 
 // Polygon Class
@@ -155,7 +157,14 @@ public:
 
 
 };
-
+//bool compare_rad(vector<point> &vec,point p1, point p2)// 라디안 비교 가장큰거
+//{
+//	double cc = ComputeAngle(p1, p2);
+//	if (cc)//라디안이 비교가능
+//		return cc > 0;
+//	else//라디안이 동일 , 수평일때
+//		return p1.x + p1.y < p2.x + p2.y; // 가장큰순서대로
+//}
 
 
 Polygon::Polygon(vector<point>& poly, int N)
@@ -166,9 +175,11 @@ Polygon::Polygon(vector<point>& poly, int N)
 
 
 	compute(poly, N); // 수평각 계산
-
+	sort(poly.begin(), poly.end(), compare_pos);
+	//sort(poly.begin(), poly.end(), compare_rad);
 
 	heapsort(poly, N);
+
 
 	cout << "\n\n";
 
@@ -207,11 +218,6 @@ void Polygon::printPoly(vector<point>& poly, int N)
 
 }
 
-
-//bool Polygon::compare_pos(point p1, point p2) {
-//	if (p1.y != p2.y) return p1.y < p2.y;
-//	else return p1.x < p2.x;
-//}
 void Polygon::compute(vector<point>& poly, int N)
 
 {
@@ -231,10 +237,6 @@ void Polygon::compute(vector<point>& poly, int N)
 	for (i = 0;i < N;i++)
 
 	{
-
-
-
-
 
 		// 수평각 계산, angle에 정보를 저장
 
@@ -278,11 +280,6 @@ double Polygon::ComputeAngle(struct point p1, struct point p2)
 
 
 
-// 삽입정렬을 사용하여 다각형의 angle 순으로 정렬
-
-
-
-
 void main()
 
 {
@@ -297,14 +294,7 @@ void main()
 	}
 
 
-
 	Polygon POLY1(poly1, N);
-
-
-
-
-
-
 
 }
 

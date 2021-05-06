@@ -123,6 +123,11 @@ void heapsort(vector<point>& v, int N)
 
 	}
 
+	for (i = 0; i <= N;i++) {
+		if (v[i].angle == v[i + 1].angle && v[i].x > v[i + 1].x)
+			swap(v, i, i + 1);
+		else if (v[i].angle < v[i + 1].angle) break;
+	}
 }
 
 
