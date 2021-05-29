@@ -176,11 +176,6 @@ int isPointInside(struct point A, vector<point>& v, int N) {
 			LastPoint = i;
 			if (!PointOnTestLine) {// false 라면
 				if (intersection(PolyLine, TestLine)) Count++;
-				/*else if (!(intersection(PolyLine, TestLine))) {
-					if (direction(TestLine.p1, TestLine.p2, PolyLine.p1) * direction(TestLine.p1, TestLine.p2, PolyLine.p2) < 0) {
-						Count++; PointOnTestLine = false;
-					}
-				}*/
 			}
 			else {// true 라면
 				if (direction(TestLine.p1, PolyLine.p2, PolyLine.p1) * direction(TestLine.p1, PolyLine.p2, v[LastPoint - 2]) < 0) {
