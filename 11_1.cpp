@@ -8,7 +8,7 @@ using namespace std;
 int comp = 0; // 비교연산카운터변수
 
 vector<int> indexBF;
-vector<int> indexRK;
+vector<int> indexBM;
 vector<int> indexKMP;
 
 int brutesearch(string a, string p)
@@ -70,47 +70,69 @@ int index(char c)
 }
 
 
+int* skip; // SP와 같은 크기로 동적 할당해 주어야함
+const int alphabet_count = 26;
+int* lp;
+int* SP;
+void LastPos(string p);
+void GoodSuffix(string p);
+void initSP(string p) {
 
-int rksearch(string p, string a)
-
-{
-	int i, dM = 1, h1 = 0, h2 = 0;
-
-	int M = p.size(), N = a.size();
-
-	for (i = 1; i < M; i++) dM = (d * dM) % q;
-
-	for (i = 0; i < M; i++)
-	{
-		h1 = (h1 * d + index(p[i])) % q; // Pattern의Hash value
-
-		h2 = (h2 * d + index(a[i])) % q; // Text의Hash value
+	int i, j, m = p.size();
+	SP = new int[m];
+	SP[0] = -1;
+	for (i = 1, j = -1; i <= m - 1; i++) {
+		while ((j >= 0) && (p[j + 1] != p[i])) j = SP[j];
+		if (p[j + 1] == p[i]) j++;
+		SP[i] = j;
 	}
-
-	for (i = 0; i <= N - M; i++) // Hash value가같지않다면비교한다.
-
-	{
-
-		comp++;
-
-		h2 = (h2 - index(a[i]) * dM) % q;
-
-		h2 = (h2 * d + index(a[i + M])) % q;
-
-		if (h1 == h2) {
-			indexRK.push_back(i + 1);
+}
+void BoyerMoore(string p, string a) {
+	int i, j, m = p.size(), n = a.size();
+	lp = new int[27];
+	skip = new int[m];
+	LastPos(p);
+	GoodSuffix(p);
+	j = 0;
+	while (j <= n - m) {
+		for (i = m - 1; i >= 0 && p[i] == a[j + i]; i--) { comp++; }
+		if (i == -1) {
+			comp++;
+			indexBM.push_back(j);
+			j = j + skip[-1];
 		}
-
+		else {
+			comp++;
+			j = j + max(skip[i], i - lp[index(a[j + i])]);
+		}
 	}
-
-	for (int z = 0; z < indexRK.size(); z++) {
-		cout << indexRK[z] << " ";
+	for (int z = 0; z < indexBM.size(); z++) {
+		cout << indexBM[z] << ' ';
 	}
 	cout << comp;
 	comp = 0;
-	return 0;
-
 }
+
+void LastPos(string p) {
+	int i;
+	for (i = 0; i < alphabet_count; i++) lp[i] = -1;
+	for (i = 0; i < p.size(); i++) lp[index(p[i])] = i;
+}
+
+void GoodSuffix(string p) {
+	int i, k, m = p.size();
+	char* r_p = new char[m];
+	for (i = 0; i < m; i++) {
+		r_p[m - i - 1] = p[i];
+	}
+	initSP(r_p);
+	for (i = -1; i <= m - 1; i++) skip[i] = m - 1 - SP[m - 1];
+	for (k = 0; k <= m - 1; k++) {
+		i = m - 1 - SP[k] - 1;
+		if (skip[i] > k - SP[k]) skip[i] = k - SP[k];
+	}
+}
+
 
 
 
@@ -127,8 +149,7 @@ void result(int index)
 	comp = 0;
 
 }
-int* SP;
-void initSP(string p);
+
 void kmpsearch(string p, string a) {
 	int i, j, m = p.size(), n = a.size();
 	initSP(p);
@@ -150,17 +171,7 @@ void kmpsearch(string p, string a) {
 	comp = 0;
 
 }
-void initSP(string p) {
 
-	int i, j, m = p.size();
-	SP = new int[m];
-	SP[0] = -1;
-	for (i = 1, j = -1; i <= m - 1; i++) {
-		while ((j >= 0) && (p[j + 1] != p[i])) j = SP[j];
-		if (p[j + 1] == p[i]) j++;
-		SP[i] = j;
-	}
-}
 // SP에 대한 메모리는 p의 크기만큼 동적 할당 해야한다.
 
 
@@ -169,7 +180,6 @@ void initSP(string p) {
 void main()
 
 {
-
 
 	string A, B;
 
@@ -189,9 +199,9 @@ void main()
 
 
 
-	cout << "--------------------RK---------------------" << endl;
+	cout << "--------------------BOYER---------------------" << endl;
 
-	indexPattern = rksearch(B, A);
+	BoyerMoore(B, A);
 
 	cout << "\n-------------------KMP---------------------" << endl;
 
