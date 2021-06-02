@@ -132,16 +132,22 @@ void initSP(string p);
 void kmpsearch(string p, string a) {
 	int i, j, m = p.size(), n = a.size();
 	initSP(p);
+
 	for (i = 0, j = -1; i <= n - 1; i++) {
-		while ((j >= 0) && (p[j + 1] != a[i])) j = SP[j];
+
+		while ((j >= 0) && (p[j + 1] != a[i])) {
+			comp++; j = SP[j];
+		}
 		if (p[j + 1] == a[i]) {
 			comp++; j++;
 		}
+		else comp++;
 		if (j == m - 1) {
 			comp++;
 			indexKMP.push_back(i - m + 1);
 			j = SP[j];
 		}
+		else comp++;
 	}
 	for (int z = 0; z < indexKMP.size(); z++) {
 		cout << indexKMP[z] << ' ';
@@ -156,8 +162,14 @@ void initSP(string p) {
 	SP = new int[m];
 	SP[0] = -1;
 	for (i = 1, j = -1; i <= m - 1; i++) {
-		while ((j >= 0) && (p[j + 1] != p[i])) j = SP[j];
-		if (p[j + 1] == p[i]) j++;
+
+		while ((j >= 0) && (p[j + 1] != p[i])) {
+			comp++; j = SP[j];
+		}
+		if (p[j + 1] == p[i]) {
+			comp++; j++;
+		}
+		else comp++;
 		SP[i] = j;
 	}
 }
