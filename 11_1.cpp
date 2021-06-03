@@ -24,9 +24,6 @@ int brutesearch(string a, string p)
 	while (i != N && j != M)
 
 	{
-
-
-
 		if (a[i] != p[j])//패턴과 문자열이 맞지 않는경우
 
 		{
@@ -42,9 +39,10 @@ int brutesearch(string a, string p)
 			j++;
 		}
 		if (j == M) {// J 증가횟수와 패턴의 크기가 일치하면 벡터에 인덱스 저장 후 다시 비교위해 J 재할당
-
+			comp++;
 			indexBF.push_back(i - M); j = 0;
 		}
+
 	}
 
 	for (int z = 0; z < indexBF.size(); z++) {
@@ -84,10 +82,12 @@ void initSP(string p) {
 	for (i = 1, j = -1; i <= m - 1; i++) {
 
 		while ((j >= 0) && (p[j + 1] != p[i])) {
-			comp++; j = SP[j];
+			comp++;
+			j = SP[j];
 		}
 		if (p[j + 1] == p[i]) {
-			comp++; j++;
+			comp++;
+			j++;
 		}
 		else comp++;
 		SP[i] = j;
@@ -100,18 +100,20 @@ void kmpsearch(string p, string a) {
 	for (i = 0, j = -1; i <= n - 1; i++) {
 
 		while ((j >= 0) && (p[j + 1] != a[i])) {
-			comp++; j = SP[j];
+			comp++;
+			j = SP[j];
 		}
 		if (p[j + 1] == a[i]) {
-			comp++; j++;
+
+			j++;
 		}
-		else comp++;
+
 		if (j == m - 1) {
 			comp++;
 			indexKMP.push_back(i - m + 1);
 			j = SP[j];
 		}
-		else comp++;
+
 	}
 	for (int z = 0; z < indexKMP.size(); z++) {
 		cout << indexKMP[z] << ' ';
